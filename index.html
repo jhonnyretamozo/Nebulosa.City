@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="estilos.css">
+<link rel="icon" type="image/png" sizes="32x32" href="icono.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icono.png">
+  <link rel="shortcut icon" href="icono.png">
+  <link rel="apple-touch-icon" href="icono.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="icono.png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#a020f0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  
+  <meta name="google-site-verification" content="KUqFmLH3QiHegkVvHXUx_0SVdw87yGuU" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">  
+<title>Nebulosa.city</title>
+<meta name="description" content="Nebulosa.city es un juego espacial multijugador online. Crea una sala, invita a tus amigos y compite para conquistar la nebulosa. ¡Juega gratis ahora!">
+<meta name="keywords" content="nebulosa city, juego espacial, juego multijugador, juego online peru, nebulosa.city">
+<meta name="author" content="Nebulosa.city">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Nebulosa.city - Juega con amigos">
+<meta property="og:description" content="Crea sala y juega online con tus amigos en Nebulosa.city">
+<meta property="og:url" content="https://nebulosa.city">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://nebulosa.city/preview.png">
+
+
+<meta name="google-site-verification" content="PEGA-AQUI-TU-CODIGO-DE-GOOGLE">
+<link rel="canonical" href="https://nebulosa.city/">
+
+</head>
+<body>
+
+<canvas id="game"></canvas>
+
+
+  <button class="exit-btn" id="exitBtn" style="display:none;">Salir</button>
+
+<div class="hud">
+  <div class="mass-panel" id="massPanel" style="display:none;">Masa: 0</div>
+  <div class="mass-panel" id="roomPanel" style="display:none; top:60px;">Sala: ----</div>
+  <div class="leaderboard" id="leaderboard" style="display:none;">
+    <h3>Top del enjambre</h3>
+    <ol id="leaderboardList"></ol>
+  </div>
+  <div class="minimap-wrap" id="minimapWrap" style="display:none;">
+    <canvas id="minimap" width="130" height="130"></canvas>
+  </div>
+  <p class="hint" id="hint" style="display:none;"></p>
+  <div class="eject-btn" id="ejectBtn" style="display:none;">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#e8dcc4" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2 v4 M12 18 v4 M2 12 h4 M18 12 h4"/></svg>
+    Masa
+  </div>
+  <div class="boost-btn" id="boostBtn" style="display:none;">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#241c08" stroke-width="2"><path d="M13 2 L4 14 h6 l-1 8 9-12 h-6 z"/></svg>
+    Impulso
+  </div>
+  </div>
+</div>
+
+<div class="overlay" id="startScreen">
+  <h1>Nebulosa.city</h1>
+  <p class="sub"></p>
+  <p class="sub" style="font-size:12px;margin-top:-20px;"></p>
+  <label for="nickname" style="color:var(--parchment);margin:0 0 8px;">Nombre de jugador</label>
+  <input id="nickname" type="text" maxlength="18" placeholder="Tu nombre" autocomplete="nickname" style="width:min(320px,90vw);padding:11px 14px;border-radius:9px;border:1px solid var(--panel-edge);background:#0c1120;color:var(--parchment);font:14px 'Work Sans',sans-serif;margin-bottom:18px;">
+  <div class="skin-row" id="skinRow"></div>
+
+  <div class="mp-panel">
+    <label class="mp-toggle-row">
+      <input type="checkbox" id="mpToggle">
+       Online
+    </label>
+    <div class="mp-fields" id="mpFields">
+      <div>
+        <label> servidor </label>
+        <input type="text" id="mpServerUrl" value="wss://nebulosa-city-server.onrender.com">
+      </div>
+      <div class="mp-row">
+        <div>
+          <label>Código de sala</label>
+          <input type="text" id="mpRoomCode" placeholder="ABCDE" maxlength="5" style="text-transform:uppercase;">
+        </div>
+      </div>
+      <div class="mp-row">
+        <button type="button" class="mp-btn" id="mpCreateBtn">Crear sala</button>
+        <button type="button" class="mp-btn" id="mpJoinBtn">Unirme a sala</button>
+      </div>
+      <div class="mp-status" id="mpStatus"></div>
+    </div>
+  </div>
+
+  <button class="play-btn" id="playBtn" disabled>Jugar</button>
+</div>
+
+<div class="overlay hidden" id="gameOverScreen">
+  <h1>¡Persidte!</h1>
+  <p class="result" id="finalMass">Masa final: 0</p><p class="sub">😂</p>
+  <button class="play-btn" id="retryBtn">Jugar de nuevo</button>
+  <button class="secondary-btn" id="changeSkinBtn">menu</button>
+</div>
+
+<div id="mobileJoystick" class="mobile-joystick" aria-label="Joystick de movimiento">
+  <div class="joystick-base"><div class="joystick-stick"></div></div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
